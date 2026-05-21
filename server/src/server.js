@@ -27,7 +27,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Explicitly handle preflight OPTIONS requests for all routes
-app.options('/*', cors(corsOptions)); 
+app.options('/(.*)', cors(corsOptions)); 
 
 
 // --- 2. Body Parsers (MUST BE AFTER CORS) ---
@@ -41,10 +41,10 @@ app.get('/api/health', (req, res) => {
 });
 
 // --- 4. Application Routes ---
-app.use('/api/auth', authRoutes);
-app.use('/api/tasks', taskRoutes);
-app.use('/api/lists', listRoutes);
-app.use('/api/boards', boardRoutes); 
+app.use('/auth', authRoutes);
+app.use('/tasks', taskRoutes);
+app.use('/lists', listRoutes);
+app.use('/boards', boardRoutes); 
 
 
 // --- 5. Database & Server Initialization ---
