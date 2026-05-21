@@ -1,11 +1,8 @@
 import axios from 'axios';
 
-// We create a custom "instance" of axios that already knows where our backend is.
 const api = axios.create({
-    baseURL: 'http://localhost:5000/api',
-    // THIS IS THE MOST IMPORTANT LINE IN YOUR FRONTEND:
-    // It tells the browser "Yes, please accept and send HTTP-only cookies!"
-    withCredentials: true 
+  // This tells React: "Use the cloud URL if it exists, otherwise use localhost"
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
 });
 
 export default api;
