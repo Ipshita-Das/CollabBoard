@@ -18,7 +18,10 @@ app.use(cookieParser()); // Parses cookies (Vital for our JWT strategy)
 
 // Configure CORS to allow our future React frontend to securely communicate
 app.use(cors({
-    origin: 'http://localhost:5173', 
+   origin: [
+    'http://localhost:5173', 
+    'https://collab-board-azure.vercel.app' // Your live Vercel frontend
+  ], 
     credentials: true 
 }));
 
