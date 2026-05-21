@@ -1,0 +1,320 @@
+/* --- GLOBAL STYLES --- */
+:root {
+  --bg-color: #fdfdfd;           /* Slightly off-white for softness */
+  --panel-bg: #ffffff;           /* Pure white for panels/cards */
+  --text-main: #2a2a2a;          /* Soft black for text */
+  --text-muted: #6a6a6a;         /* Gray for descriptions/subheadings */
+  --border-color: #eaeaea;       /* Soft border line */
+  
+  --primary-accent: #65a30d;     /* A clean green (from the Shopify logo) for CTAs */
+  
+  --shadow-subtle: 0 4px 12px rgba(0,0,0,0.03); /* Soft, invisible shadow */
+  --shadow-hover: 0 8px 24px rgba(0,0,0,0.06);  /* Deeper shadow on hover */
+  
+  --heading-font: 'Playfair Display', serif; /* Modern Serif from image */
+  --body-font: 'Open Sans', sans-serif;       /* Clean Sans-Serif */
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--body-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--heading-font);
+  font-weight: 600;
+  margin: 0;
+}
+
+/* --- UTILITY CLASSES --- */
+.primary-button {
+  padding: 10px 24px;
+  background-color: var(--primary-accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--body-font);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.primary-button:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 4px 10px rgba(101, 163, 13, 0.2);
+}
+
+.secondary-button {
+  padding: 8px 16px;
+  background-color: var(--panel-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.secondary-button:hover {
+  background-color: #f8f8f8;
+  border-color: #ccc;
+}
+
+.clean-input {
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: var(--body-font);
+  font-size: 14px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.clean-input:focus {
+  border-color: var(--primary-accent);
+  outline: none;
+}
+
+/* --- DASHBOARD: COMMAND CENTER LAYOUT --- */
+.command-center {
+  padding: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.command-center-header {
+  font-size: 36px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 15px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- DEPLOY FORM --- */
+.deploy-panel {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 50px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.deploy-panel h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.deploy-form {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* --- BOARD GRID --- */
+.board-grid {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.empty-state {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.board-card {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  width: 300px;
+  cursor: pointer;
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.board-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-accent);
+}
+
+.board-card h3 {
+  font-size: 18px;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.board-card p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* --- BOARDVIEW: KANBAN CANVAS LAYOUT --- */
+.kanban-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+}
+
+/* --- TOP NAVIGATION --- */
+.kanban-nav {
+  padding: 20px 60px;
+  background-color: var(--panel-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-subtle);
+}
+
+.kanban-nav h2 {
+  font-size: 24px;
+}
+
+/* --- KANBAN CANVAS --- */
+.kanban-canvas {
+  padding: 40px 60px;
+  display: flex;
+  gap: 30px;
+  overflow-X: auto;
+  flex-grow: 1;
+  align-items: flex-start;
+}
+
+/* --- KANBAN COLUMN --- */
+.kanban-column {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  width: 320px;
+  min-width: 320px;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  box-shadow: var(--shadow-subtle);
+}
+
+.kanban-column h3 {
+  font-size: 16px;
+  font-family: var(--body-font);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+/* --- TASKS AREA --- */
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-Y: auto;
+  padding-right: 5px;
+}
+
+/* --- TASK CARD --- */
+.task-card {
+  background-color: #fcfcfc;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+  transition: all 0.2s ease;
+}
+
+.task-card:hover {
+  background-color: var(--panel-bg);
+  border-color: #ccc;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.task-card h4 {
+  font-family: var(--body-font);
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--text-main);
+  margin: 0;
+}
+
+/* --- ADD CARD BUTTON --- */
+.add-task-container {
+  margin-top: 15px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 15px;
+}
+
+.add-task-toggle {
+  width: 100%;
+  padding: 10px;
+  background-color: transparent;
+  color: var(--primary-accent);
+  border: 1px dashed var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.add-task-toggle:hover {
+  background-color: #fcfcfc;
+  border-color: var(--primary-accent);
+}
+
+.add-task-form .primary-button {
+  font-size: 13px;
+  padding: 6px 16px;
+}
+
+.add-task-form .secondary-button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* --- ADD LIST BUTTON --- */
+.add-list-toggle {
+  min-width: 320px;
+  height: fit-content;
+  padding: 20px;
+  background-color: #f5f5f5;
+  color: var(--text-muted);
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.add-list-toggle:hover {
+  background-color: var(--panel-bg);
+  border-color: var(--primary-accent);
+  color: var(--primary-accent);
+}
+
+.add-list-form {
+  min-width: 320px;
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  border-radius: 12px;
+}
