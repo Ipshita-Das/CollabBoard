@@ -27,7 +27,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Explicitly handle preflight OPTIONS requests for all routes
-app.options('*', cors(corsOptions)); 
+app.options('/*', cors(corsOptions)); 
 
 
 // --- 2. Body Parsers (MUST BE AFTER CORS) ---
