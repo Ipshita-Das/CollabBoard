@@ -2,6 +2,9 @@ import axios from 'axios';
 import Task from './Task.model.js';
 import List from '../lists/List.model.js';
 
+// --- Helper to get the correct Python URL ---
+const getPythonUrl = () => process.env.PYTHON_API_URL || 'http://localhost:8000';
+
 // --- @route POST /api/tasks ---
 // --- @access Private ---
 export const createTask = async (req, res) => {
@@ -48,6 +51,7 @@ export const getTasksForBoard = async (req, res) => {
         res.status(500).json({ message: 'Error fetching tasks', error: error.message });
     }
 };
+
 export const generateLocalSubtasks = async (req, res) => {
   const { title } = req.body;
 
@@ -56,7 +60,7 @@ export const generateLocalSubtasks = async (req, res) => {
   }
 
   try {
-    const pythonResponse = await axios.post('http://localhost:8000/generate-subtasks', {
+    const pythonResponse = await axios.post(`${getPythonUrl()}/generate-subtasks`, {
       title: title
     });
     res.status(200).json({ subtasks: pythonResponse.data.subtasks });
@@ -65,25 +69,28 @@ export const generateLocalSubtasks = async (req, res) => {
     res.status(500).json({ message: "Failed to connect to Python ML Microservice." });
   }
 };
+
 export const generateBoardDescription = async (req, res) => {
   try {
-    const pythonResponse = await axios.post('http://localhost:8000/generate-description', {
+    const pythonResponse = await axios.post(`${getPythonUrl()}/generate-description`, {
       board_title: req.body.title
     });
     res.status(200).json(pythonResponse.data);
   } catch (error) {
+    console.error("ML Engine Error:", error.message);
     res.status(500).json({ message: "ML Engine offline." });
   }
 };
 
 export const suggestTasksByList = async (req, res) => {
   try {
-    const pythonResponse = await axios.post('http://localhost:8000/suggest-tasks', {
+    const pythonResponse = await axios.post(`${getPythonUrl()}/suggest-tasks`, {
       list_name: req.body.listName,
       board_title: req.body.boardTitle
     });
     res.status(200).json(pythonResponse.data);
   } catch (error) {
+    console.error("ML Engine Error:", error.message);
     res.status(500).json({ message: "ML Engine offline." });
   }
 };
