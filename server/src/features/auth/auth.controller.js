@@ -8,7 +8,7 @@ const generateToken = (id, role) => {
     });
 };
 
-// --- @route POST /api/auth/register ---
+// --- @route POST /auth/register ---
 export const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -31,8 +31,8 @@ export const registerUser = async (req, res) => {
         
         res.cookie('jwt', token, {
             httpOnly: true, // Prevents XSS attacks
-            secure: process.env.NODE_ENV !== 'development', // Must be true in production (HTTPS)
-            sameSite: 'strict', // Prevents CSRF attacks
+            secure: true, // REQUIRED for cross-site cookies
+            sameSite: 'none', // ALLOWS cross-site cookies (Vercel -> Render)
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
         });
 
@@ -48,7 +48,7 @@ export const registerUser = async (req, res) => {
     }
 };
 
-// --- @route POST /api/auth/login ---
+// --- @route POST /auth/login ---
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -64,8 +64,8 @@ export const loginUser = async (req, res) => {
             
             res.cookie('jwt', token, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV !== 'development',
-                sameSite: 'strict',
+                secure: true, // REQUIRED for cross-site cookies
+                sameSite: 'none', // ALLOWS cross-site cookies (Vercel -> Render)
                 maxAge: 7 * 24 * 60 * 60 * 1000 
             });
 
